@@ -92,10 +92,8 @@ def score_text(plain):
         if t in WORD_SCORE:
             word_score += 4.0 + 6.0 * WORD_SCORE[t]
         else:
-            # Softer penalty for unknown words.
             word_score -= 0.8 if len(t) > 2 else 0.2
 
-    # Add a frequency-shape score (chi-square, lower is better).
     cnt = Counter(c for c in plain.lower() if c.isalpha())
     total = sum(cnt.values()) or 1
     chi = 0.0
@@ -118,7 +116,6 @@ def crack_substitution(ciphertext, restarts=25, iterations=8000):
 
     for _ in range(restarts):
         cur = dict(base_map)
-        # Shake key before climb.
         for _ in range(150):
             a, b = random.sample(LETTERS, 2)
             cur[a], cur[b] = cur[b], cur[a]
@@ -132,7 +129,6 @@ def crack_substitution(ciphertext, restarts=25, iterations=8000):
             candidate = decrypt_substitution(ciphertext, cur)
             cand_score = score_text(candidate)
 
-            # Hill climb with tiny random acceptance to escape local maxima.
             if cand_score > cur_score or random.random() < 0.003:
                 cur_plain, cur_score = candidate, cand_score
             else:
