@@ -25,7 +25,7 @@ COMMON_WORDS = [
     "because", "come", "people", "just", "those", "each", "good", "how", "long", "use",
     "very", "still", "between", "last", "never", "same", "while", "right", "might",
     "off", "find", "course", "fact", "internet", "students", "network", "university",
-    "security", "reports", "public", "access", "upload", "college",
+    "security", "reports", "public", "access", "upload", "college", "departement", "pxl"
 ]
 WORD_SCORE = {w: (len(COMMON_WORDS) - i) / len(COMMON_WORDS) for i, w in enumerate(COMMON_WORDS)}
 
